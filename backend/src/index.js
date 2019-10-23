@@ -7,7 +7,7 @@ const morgar = require('morgan');
 const app = express();
 const mongoose = require('mongoose');
 const brand = require('./routes/brand');
-
+const modelBrand = require('./routes/modelBrand');
 
 const PORTA = 8081;
 
@@ -31,4 +31,4 @@ app.use(express.json());
 app.use(morgar('dev'));
 
 app.use('/list-brand-fipe', brand);
-
+app.use('/list-model-brand-fipe', modelBrand);
