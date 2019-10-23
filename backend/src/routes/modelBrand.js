@@ -79,14 +79,6 @@ router.post('/favorite-model', async (req, res) => {
 
 
 
-
-
-
-
-
-
-
-
 async function filterObje(obj) {
     let data = [];
     obj.forEach(item => {

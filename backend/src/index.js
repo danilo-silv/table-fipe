@@ -8,6 +8,8 @@ const app = express();
 const mongoose = require('mongoose');
 const brand = require('./routes/brand');
 const modelBrand = require('./routes/modelBrand');
+const modelYear = require('./routes/modelYear');
+
 
 const PORTA = 8081;
 
@@ -32,3 +34,4 @@ app.use(morgar('dev'));
 
 app.use('/list-brand-fipe', brand);
 app.use('/list-model-brand-fipe', modelBrand);
+app.use('/list-model-year-fipe', modelYear);
