@@ -1,0 +1,46 @@
+header#main-header {
+    height: 3.5em;
+    left: 0;
+    line-height: 3.5em;
+    padding: 0 1.25em;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10000;
+    background-color: transparent;
+    border-bottom: solid 1px rgba(255, 255, 255, 0.5);
+}
+
+header nav {
+    font-family: Raleway, Helvetica, sans-serif;
+    font-size: 0.8em;
+    font-weight: 700;
+    height: 3em;
+    letter-spacing: 0.1em;
+    line-height: 3em;
+    position: absolute;
+    right: 0.7em;
+    text-transform: uppercase;
+    top: 0.7em;
+}
+
+header nav a[href="#menu"] {
+    text-decoration: none;
+    -moz-transition: background-color 0.2s ease-in-out;
+    -webkit-transition: background-color 0.2s ease-in-out;
+    -ms-transition: background-color 0.2s ease-in-out;
+    transition: background-color 0.2s ease-in-out;
+    border-radius: 5px;
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.125);
+    padding: 0 1.35em;
+}
+
+header .logo-laborit {
+    display: none;
+    padding: 13px 0 0 0;
+    transition: all .4s;
+}
+
+header .logo{
+    max-width: 100px;
+}

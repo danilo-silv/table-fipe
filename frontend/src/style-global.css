@@ -1,0 +1,55 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Raleway, Helvetica, sans-serif;
+  font-size: 14px;
+  color: #ffffff;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  background-color: #183026;
+  background-image: url(./image/overlay.png), url(./image/bg.jpg);
+  background-repeat: repeat, no-repeat;
+  background-size: auto, cover;
+  background-position: top left, center 0;
+  background-attachment: fixed, fixed;
+  text-shadow: 0 0 0.5px rgba(58, 57, 57, 0.25);
+  -webkit-text-stroke: 0.25px;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 10px
+}
+
+body::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, .1);
+  border-radius: 0
+}
+
+body::-webkit-scrollbar-thumb {
+  cursor: pointer;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, .25);
+  -webkit-transition: color .2s ease;
+  transition: color .2s ease
+}
+
+body::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(0, 0, 0, .15)
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: hsla(202, 5%, 52%, .8)
+}
