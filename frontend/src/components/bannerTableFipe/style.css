@@ -1,0 +1,50 @@
+.banner-table-fipe::before {
+    width: 100%;
+    height: 450px;
+    position: absolute;
+    content: "";
+    background: url(../../image/banner-table-fipe.jpg) no-repeat scroll top;
+    background-color: #183026;
+    background-size: cover;
+    z-index: 0;
+    top: -20px;
+}
+
+.container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.content {
+    width: 100%;
+    max-width: 400px;
+    margin: 30px;
+    padding: 20px;
+}
+
+.container h1, .container p {
+    font-size: 56px;
+    margin: 0 auto 10px;
+    padding-top: 265px;
+    text-align: center;
+    line-height: 50px;
+    text-transform: uppercase;
+    font-kerning: none;
+    font-weight: 100;
+}
+
+.container p {
+    font-size: 17px;
+    padding-top: 0;
+    line-height: 23px;
+}
+
+
+@media screen and (max-width: 490px) {
+    .container h1{
+        padding-top: 230px;  
+    }
+}

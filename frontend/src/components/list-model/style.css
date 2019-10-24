@@ -1,0 +1,94 @@
+.model {
+    overflow: hidden;
+    display: block;
+}
+
+.group-cards {
+    color: #000;
+    background-color: #fff;
+    padding: 0 25px;
+    position: relative;
+    margin-bottom: 30px;
+    display: block;
+}
+
+.sidebar-model {
+    color: #fff;
+    background-color: #41434e;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    width: 1122px;
+}
+
+.models p.check {
+    padding: 274px 468px;
+}
+
+section.children.models .item {
+    width: 250px;
+}
+
+section.children.models .description {
+    background: #3c415a;
+    padding: 9px;
+    width: 240px;
+    height: 84px;
+    display: inline-block;
+}
+
+div.description {
+    padding: 25px;
+}
+
+div.description h2.title {
+    font-weight: 500;
+    line-height: 24px;
+}
+
+h2.title strong {
+    font-weight: 700;
+}
+
+.children.models button {
+    font-size: 0.65em;
+    font-feature-settings: "pcap";
+    font-variant: petite-caps;
+    border: solid 1px #ddd;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    transition: all .5s;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    -webkit-user-select: none;
+    user-select: none;
+    background-color: #00000026;
+    outline: none;
+}
+
+.children.models button:hover {
+    border-color: #29df93;
+    background-color: #29df93;
+}
+
+@media screen and (max-width: 850px) {
+    .models p.check {
+        padding: 79px 77px;
+    }
+    .sidebar-model {
+        width: auto;
+    }
+    section.children.models .item {
+        width: auto;
+    }
+    section.children.models .description {
+        width: 116px;
+        display: inline-table;
+    }
+    div.description h2.title {
+        font-size: 11px;
+        line-height: 16px;
+    }
+}
