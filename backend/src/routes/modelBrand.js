@@ -8,7 +8,7 @@ router.post('/', async (req, res) => {
         let filterData = '';
         let options = {
             page: (page <= 0) ? 1 : page,
-            limit: (isMobile == true) ? 8 : 36
+            limit: (isMobile == true) ? 8 : 16
         }
 
         console.log(options);

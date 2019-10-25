@@ -21,7 +21,7 @@ div.filter-brand {
     /* padding: 0 20px;*/
 }
 
-aside.sidebar-brand {
+aside.sidebar {
     position: relative;
     display: block;
     float: left;
@@ -112,7 +112,7 @@ div.active-brd {
 
 .model-brand {
     max-width: 1126px;
-    margin: 0 auto;
+    margin: 0 auto 200px;
 }
 
 @media screen and (max-width: 800px) {

@@ -4,7 +4,7 @@ import "./style.css";
 import { trackPromise } from 'react-promise-tracker';
 import api from "../../service/index";
 import LoadingIndicator from "../loading/index";
-
+import { Link, animateScroll as scroll } from "react-scroll";
 export default class ListModel extends Component {
     constructor(props) {
         super(props);
@@ -20,7 +20,9 @@ export default class ListModel extends Component {
         this.setModel = this.setModel.bind(this);
         this.loadModels = this.loadModels.bind(this);
     }
-
+    scrollToTop = () => {
+        scroll.scrollToTop();
+    };
     UNSAFE_componentWillReceiveProps(nextProps) {
         if (this.props.codeBrand.inf !== nextProps.codeBrand.inf) {
             let { codeBrand, brand, model } = nextProps.codeBrand.inf;
@@ -61,7 +63,7 @@ export default class ListModel extends Component {
         return (
 
             <div className="main-category">
-                <aside className="sidebar-brand">
+                <aside className="sidebar">
                     <div className="sidebar-model">
                         <div className="sidebar-widget widget_categories">
                             <div className="sidebar-title">
@@ -84,7 +86,18 @@ export default class ListModel extends Component {
                                                                 </h2>
                                                             </div>
                                                             <p className="button-scroll">
-                                                                <button>Veja anos do modelo</button>
+                                                                <Link
+                                                                    activeClass="active"
+                                                                    to="year"
+                                                                    spy={true}
+                                                                    smooth={true}
+                                                                    offset={-70}
+                                                                    duration={500}
+                                                                >
+                                                                    <button onClick={() => { this.props.modelYear(model) }}
+                                                                    >Veja anos do modelo</button>
+
+                                                                </Link>
                                                             </p>
                                                         </div>
                                                     ))}

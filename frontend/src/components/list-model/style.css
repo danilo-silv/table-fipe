@@ -17,6 +17,9 @@
     background-color: #41434e;
     border: 1px solid transparent;
     border-radius: 5px;
+}
+
+.models {
     width: 1122px;
 }
 
@@ -32,7 +35,7 @@ section.children.models .description {
     background: #3c415a;
     padding: 9px;
     width: 240px;
-    height: 84px;
+    height: 76px;
     display: inline-block;
 }
 

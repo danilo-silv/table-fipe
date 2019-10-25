@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { isMobile } from 'react-device-detect';
 import ListModel from "../list-model/index";
 import LoadingIndicator from "../loading/index";
+import ListModelYear from "../list-model-year/index";
 import api from "../../service/index";
 import "./style.css";
 export default class TableFipe extends Component {
@@ -15,6 +16,8 @@ export default class TableFipe extends Component {
             active: {},
             modelo: '',
             loading: false,
+            modeloSelected: {},
+
         }
 
         this.setBrand = this.setBrand.bind(this);
@@ -48,6 +51,10 @@ export default class TableFipe extends Component {
         selected[name] = selectedCircles;
         this.setState({ codeBrandSelected, active: selected });
     };
+    modelYear(modeloSelected) {
+        console.log(modeloSelected);
+        this.setState({ modeloSelected });
+    }
 
     render() {
         const { brands, page, brandsInfo, loading } = this.state;
@@ -62,7 +69,7 @@ export default class TableFipe extends Component {
                                 </div>
                                 <div className="sidebar-content">
                                     <section className="children">
-                                        {loading ? <LoadingIndicator />:
+                                        {loading ? <LoadingIndicator /> :
                                             <div className="content-brands">
                                                 {brands.map(brand => (
                                                     <div key={brand.codigo} onClick={this.setBrand.bind(this, brand.codigo, brand.nome)}
@@ -80,7 +87,11 @@ export default class TableFipe extends Component {
                 </div>
 
                 <div className="model-brand" >
-                    <ListModel codeBrand={{ inf: { "model": this.state.modelo, "codeBrand": this.state.codeBrandSelected, "brand": this.state.active } }} />
+                    <ListModel codeBrand={{ inf: { "model": this.state.modelo, "codeBrand": this.state.codeBrandSelected, "brand": this.state.active } }}
+                        modelYear={this.modelYear.bind(this)} />
+                </div>
+                <div className="model-year" id="year">
+                    <ListModelYear data={this.state.modeloSelected} />
                 </div>
             </div>
         )
