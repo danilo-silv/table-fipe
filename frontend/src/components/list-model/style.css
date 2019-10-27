@@ -19,6 +19,10 @@
     border-radius: 5px;
 }
 
+.content-models {
+    display: inline-block;
+}
+
 .models {
     width: 1122px;
 }
@@ -84,14 +88,16 @@ h2.title strong {
         width: auto;
     }
     section.children.models .item {
-        width: 99px;
+        width: 66px;
     }
     section.children.models .description {
-        width: 102px;
-        display: inline-table;
+        width: 74px;
+        display: inline-flex;
+        height: 123px;
+        padding: 0px;
     }
     .models {
-        width: auto;
+        width: 290px;
     }
     div.description h2.title {
         font-size: 11px;

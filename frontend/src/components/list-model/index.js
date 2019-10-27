@@ -65,60 +65,59 @@ export default class ListModel extends Component {
         const currentModels = models.slice(indexOfFirstPost, indexOfLastBrand);
         return (
 
-            <div className="main-category">
-                <aside className="sidebar">
-                    <div className="sidebar-model">
-                        <div className="sidebar-widget widget_categories">
-                            <div className="sidebar-title">
-                                <p className="title">{brand}</p>
-                            </div>
-                            <div className="sidebar-content">
-                                <div className="models">
-                                    {this.state.brand === '' ?
-                                        <p className="check">Selecione uma marca</p>
-                                        :
-                                        <section className="children models">
-                                            {loading ? <LoadingIndicator /> :
-                                                <div className="content-models">
-                                                    {currentModels.map(model => (
-                                                        <div key={model.codigo} onClick={this.setModel.bind(this, model.codigo, model.nome)}
-                                                            className={(this.state.active[model.nome] !== undefined) ? `model-${model.nome} item ` + this.state.active[model.nome] : `model-${model.nome} item`}>
-                                                            <div className="description">
-                                                                <h2 className="title">
-                                                                    <strong>Nome - </strong> {model.nome}<br /> <strong>Marca - </strong>{brand}
-                                                                </h2>
-                                                            </div>
-                                                            <p className="button-scroll">
-                                                                <Link
-                                                                    activeClass="active"
-                                                                    to="year"
-                                                                    spy={true}
-                                                                    smooth={true}
-                                                                    offset={-70}
-                                                                    duration={500}
-                                                                >
-                                                                    <button onClick={() => { this.props.modelYear(model) }}
-                                                                    >Veja anos do modelo</button>
 
-                                                                </Link>
-                                                            </p>
+            <aside className="sidebar">
+                <div className="sidebar-model">
+                    <div className="sidebar-widget widget_categories">
+                        <div className="sidebar-title">
+                            <p className="title">{brand}</p>
+                        </div>
+                        <div className="sidebar-content">
+                            <div className="models">
+                                {this.state.brand === '' ?
+                                    <p className="check">Selecione uma marca</p>
+                                    :
+                                    <section className="children models">
+                                        {loading ? <LoadingIndicator /> :
+                                            <div className="content-models">
+                                                {currentModels.map(model => (
+                                                    <div key={model.codigo} onClick={this.setModel.bind(this, model.codigo, model.nome)}
+                                                        className={(this.state.active[model.nome] !== undefined) ? `model-${model.nome} item ` + this.state.active[model.nome] : `model-${model.nome} item`}>
+                                                        <div className="description">
+                                                            <h2 className="title">
+                                                                <strong>Nome - </strong> {model.nome}<br /> <strong>Marca - </strong>{brand}
+                                                            </h2>
                                                         </div>
-                                                    ))}
-                                                </div>
-                                            }
-                                        </section>
-                                    }
-                                </div>
-                                <Pagination
-                                    itemPerPage={modelsParPage}
-                                    totalItens={models.length}
-                                    paginate={this.paginate.bind(this)}
-                                />
+                                                        <p className="button-scroll">
+                                                            <Link
+                                                                activeClass="active"
+                                                                to="year"
+                                                                spy={true}
+                                                                smooth={true}
+                                                                offset={-70}
+                                                                duration={500}
+                                                            >
+                                                                <button onClick={() => { this.props.modelYear(model) }}
+                                                                >Veja anos do modelo</button>
+
+                                                            </Link>
+                                                        </p>
+                                                    </div>
+                                                ))}
+                                                <Pagination
+                                                    itemPerPage={modelsParPage}
+                                                    totalItens={models.length}
+                                                    paginate={this.paginate.bind(this)}
+                                                />
+                                            </div>
+                                        }
+                                    </section>
+                                }
                             </div>
                         </div>
                     </div>
-                </aside>
-            </div>
+                </div>
+            </aside>
         )
     };
 };

@@ -51,7 +51,6 @@ export default class TableFipe extends Component {
 
 
     modelYear(modeloSelected) {
-        console.log(modeloSelected);
         this.setState({ modeloSelected });
     };
     paginate(pageNumber) {
@@ -73,9 +72,11 @@ export default class TableFipe extends Component {
                                 <div className="sidebar-title">
                                     <p className="title">Marcas</p>
                                 </div>
-                                <div className="sidebar-content">
-                                    <section className="children">
-                                        {loading ? <LoadingIndicator /> :
+                                {loading ? <LoadingIndicator /> :
+                                    <div className="sidebar-content">
+
+                                        <section className="children">
+
                                             <div className="content-brands">
                                                 {currentBrands.map(brand => (
                                                     <div key={brand.codigo} onClick={this.setBrand.bind(this, brand.codigo, brand.nome)}
@@ -83,15 +84,16 @@ export default class TableFipe extends Component {
                                                         <span>{brand.nome}</span>
                                                     </div>
                                                 ))}
+
                                             </div>
-                                        }
-                                    </section>
-                                </div>
-                                <Pagination
-                                    itemPerPage={brandsParPage}
-                                    totalItens={brands.length}
-                                    paginate={this.paginate.bind(this)}
-                                />
+                                        </section>
+                                        <Pagination
+                                            itemPerPage={brandsParPage}
+                                            totalItens={brands.length}
+                                            paginate={this.paginate.bind(this)}
+                                        />
+                                    </div>
+                                }
                             </div>
                         </div>
                     </aside>
@@ -106,7 +108,7 @@ export default class TableFipe extends Component {
                     />
                 </div>
                 <div className="model-year" id="year">
-                    <ListModelYear data={this.state.modeloSelected} />
+                    <ListModelYear data={{ "vehicle": this.state.modeloSelected, "modelo": modelo, "codeBrand": brandSelected }} />
                 </div>
             </div>
         )

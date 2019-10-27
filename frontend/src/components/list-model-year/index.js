@@ -10,8 +10,8 @@ export default class ListModelYear extends Component {
         super(props);
         this.state = {
             models: [],
-            modelInfo: {},
-            page: 1,
+            currentPage: 1,
+            modelsParPage: (isMobile === true) ? 8 : 16,
             modelSelected: '',
             active: {},
             loading: false,
@@ -22,41 +22,36 @@ export default class ListModelYear extends Component {
     };
     UNSAFE_componentWillReceiveProps(nextProps) {
         if (this.props.data !== nextProps.data) {
-            console.log(nextProps);
-            let { codigoMarca, codigo, nome, modelo } = nextProps.data;
-            if (codigoMarca !== "") {
-                console.log('não é vazio')
-                this.loadModelsYear(1, modelo, codigoMarca, codigo);
-                this.setState({ modelSelected: nome })
+            let { codeBrand, vehicle, modelo } = nextProps.data;
+            if (vehicle.codigo !== undefined) {
+                this.loadModelsYear(modelo, codeBrand, vehicle.codigo);
+                this.setState({ modelSelected: vehicle.nome })
             }
 
         }
 
     };
-    componentDidMount() {
-        // console.log(data);
-        // this.setState({ modelo })
-        // this.loadBrands(1, modelo);
-    };
-    loadModelsYear = async (page = 1, model, codeBrand, codeVehicle) => {
-        this.setState({ loading: true })
-        var headersConfig = {
-            headers: {
-                "Content-Type": "application/json",
-            }
-        };
+    // componentDidMount() {
+    //     console.log(data);
+    //     this.setState({ modelo })
+    //     this.loadBrands(1, modelo);
+    // };
 
-        const response = await trackPromise(api.post(`/list-model-year-fipe/`, { "codigoMarca": codeBrand, "modelo": model, "codigoVeiculo": codeVehicle, "page": page, "isMobile": (isMobile === true) ? true : false }, headersConfig));
+    loadModelsYear = async (model, codeBrand, codigo) => {
+        this.setState({ loading: true });
+        const response = await trackPromise(api.get(`/${model}/marcas/${codeBrand}/modelos/${codigo}/anos`));
         console.log(response);
-        const { docs, ...modelsInfo } = response.data;
-        this.setState({ models: docs, modelsInfo, page, loading: false });
+        const { modelos } = response.data;
+        this.setState({ models: modelos, loading: false });
     };
+
     render() {
         const { modelSelected } = this.state;
         return (
             <div className="content-year">
-                {/* {this.modelSelected != ""
-                    ? (
+                {modelSelected == "" ? null
+                    :
+                    <div className="model-years">
                         <div className="title-category">
                             <h1>Anos do modelo</h1>
                         </div>
@@ -73,13 +68,11 @@ export default class ListModelYear extends Component {
                                     </div>
                                 </div>
                             </div>
-                        </aside> 
-                    )
+                        </aside>
+                    </div>
 
-                    :
-                    <p>vazio</p>
-                } */}
 
+                }
             </div>
 
         )
