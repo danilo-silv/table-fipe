@@ -3,3 +3,31 @@
     margin: 20px auto 0;
     padding: 0 20px;
 }
+
+.content-year {
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.title-category {
+    margin-bottom: 4rem;
+    border-bottom: solid 0.5px white;
+}
+
+.title-category h1 {
+    text-transform: uppercase;
+    font-size: 1rem;
+    white-space: nowrap;
+    border-radius: 1.5px;
+    flex-grow: 0;
+    color: white;
+    padding: 16px 6px 6px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.5s, border 0.5s;
+}

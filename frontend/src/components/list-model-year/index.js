@@ -3,7 +3,7 @@ import { isMobile } from 'react-device-detect';
 import "./style.css";
 import { trackPromise } from 'react-promise-tracker';
 import api from "../../service/index";
-import LoadingIndicator from "../loading/index";
+import LoadingIndicator from "../Loading/index";
 
 export default class ListModelYear extends Component {
     constructor(props) {
@@ -12,64 +12,74 @@ export default class ListModelYear extends Component {
             models: [],
             modelInfo: {},
             page: 1,
-            codeModelSelected: '',
-            brand: '',
+            modelSelected: '',
             active: {},
             loading: false,
         }
-        // console.log(this.props);
         // this.setModel = this.setModel.bind(this);
         // this.loadModels = this.loadModels.bind(this);
+        this.loadModelsYear = this.loadModelsYear.bind(this);
     };
     UNSAFE_componentWillReceiveProps(nextProps) {
         if (this.props.data !== nextProps.data) {
             console.log(nextProps);
-            // let { codeBrand, brand, model } = nextProps.codeBrand.inf;
-            // if (codeBrand !== "" && brand !== "") {
-            //     console.log('não é vazio')
-            //     this.loadModels(1, model, codeBrand);
-            //     this.setState({ brand: Object.keys(brand).join() })
-            // }
+            let { codigoMarca, codigo, nome, modelo } = nextProps.data;
+            if (codigoMarca !== "") {
+                console.log('não é vazio')
+                this.loadModelsYear(1, modelo, codigoMarca, codigo);
+                this.setState({ modelSelected: nome })
+            }
 
         }
 
     };
     componentDidMount() {
-        const { data } = this.props;
         // console.log(data);
         // this.setState({ modelo })
         // this.loadBrands(1, modelo);
     };
-    // loadModels = async (page = 1, model, codeBrand) => {
-    //     this.setState({ loading: true })
-    //     var headersConfig = {
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //         }
-    //     };
+    loadModelsYear = async (page = 1, model, codeBrand, codeVehicle) => {
+        this.setState({ loading: true })
+        var headersConfig = {
+            headers: {
+                "Content-Type": "application/json",
+            }
+        };
 
-    //     const response = await trackPromise(api.post(`/list-model-brand-fipe/`, { "codigoMarca": codeBrand, "modelo": model, "page": page, "isMobile": (isMobile === true) ? true : false }, headersConfig));
-    //     console.log(response);
-    //     const { docs, ...modelsInfo } = response.data;
-    //     this.setState({ models: docs, modelsInfo, page, loading: false });
-    // };
+        const response = await trackPromise(api.post(`/list-model-year-fipe/`, { "codigoMarca": codeBrand, "modelo": model, "codigoVeiculo": codeVehicle, "page": page, "isMobile": (isMobile === true) ? true : false }, headersConfig));
+        console.log(response);
+        const { docs, ...modelsInfo } = response.data;
+        this.setState({ models: docs, modelsInfo, page, loading: false });
+    };
     render() {
+        const { modelSelected } = this.state;
         return (
             <div className="content-year">
-                <aside className="sidebar">
-                    <div className="sidebar-model">
-                        <div className="sidebar-widget widget_categories">
-                            <div className="sidebar-title">
-                                <p className="title">modelo Ano</p>
-                            </div>
-                            <div className="sidebar-content">
-                                <div className="models-year">
-                                    <p>Selecione uma marca</p>
+                {/* {this.modelSelected != ""
+                    ? (
+                        <div className="title-category">
+                            <h1>Anos do modelo</h1>
+                        </div>
+                        <aside className="sidebar">
+                            <div className="sidebar-model">
+                                <div className="sidebar-widget widget_categories">
+                                    <div className="sidebar-title">
+                                        <p className="title">{modelSelected}</p>
+                                    </div>
+                                    <div className="sidebar-content">
+                                        <div className="models-year">
+                                            <p>Selecione uma marca</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </aside>
+                        </aside> 
+                    )
+
+                    :
+                    <p>vazio</p>
+                } */}
+
             </div>
 
         )

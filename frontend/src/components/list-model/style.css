@@ -78,17 +78,20 @@ h2.title strong {
 
 @media screen and (max-width: 850px) {
     .models p.check {
-        padding: 79px 77px;
+        padding: 79px 88px;
     }
     .sidebar-model {
         width: auto;
     }
     section.children.models .item {
-        width: auto;
+        width: 99px;
     }
     section.children.models .description {
-        width: 116px;
+        width: 102px;
         display: inline-table;
+    }
+    .models {
+        width: auto;
     }
     div.description h2.title {
         font-size: 11px;

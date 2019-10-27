@@ -21,12 +21,6 @@ div.filter-brand {
     /* padding: 0 20px;*/
 }
 
-aside.sidebar {
-    position: relative;
-    display: block;
-    float: left;
-}
-
 aside .sidebar-wrapper {
     position: relative;
     top: auto;
@@ -126,13 +120,13 @@ div.active-brd {
         padding: 17px 0;
     }
     section.children .item {
-        width: 66px;
+        width: 79px;
     }
     section.children .item span {
         font-size: 8px;
     }
     section.children {
-        max-width: 292px;
+        max-width: 364px;
     }
 }
 

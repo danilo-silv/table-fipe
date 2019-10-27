@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import BannerTableFipe from "../../components/bannerTableFipe";
-import FilterBrand from "../../components/filter-brand"
+import BannerTableFipe from "../../components/BannerTableFipe";
+import ListBrand from "../../components/List-brand"
 import "./style.css";
 
 export default class TableFipe extends Component {
@@ -14,7 +14,7 @@ export default class TableFipe extends Component {
             <div className="table-fipe" >
                 <main className="main" >
                     <BannerTableFipe />
-                    <FilterBrand modelo={modelo} />
+                    <ListBrand modelo={modelo} />
                 </main>
             </div>
         )

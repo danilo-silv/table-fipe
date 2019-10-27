@@ -1,17 +1,18 @@
 import React, { Component } from "react";
+import LoadingIndicator from "../Loading/index";
+import Pagination from "../Pagination/index";
+import { Link, animateScroll as scroll } from "react-scroll";
 import { isMobile } from 'react-device-detect';
-import "./style.css";
 import { trackPromise } from 'react-promise-tracker';
 import api from "../../service/index";
-import LoadingIndicator from "../loading/index";
-import { Link, animateScroll as scroll } from "react-scroll";
+import "./style.css";
 export default class ListModel extends Component {
     constructor(props) {
         super(props);
         this.state = {
             models: [],
-            modelInfo: {},
-            page: 1,
+            currentPage: 1,
+            modelsParPage: (isMobile === true) ? 8 : 16,
             codeModelSelected: '',
             brand: '',
             active: {},
@@ -20,15 +21,13 @@ export default class ListModel extends Component {
         this.setModel = this.setModel.bind(this);
         this.loadModels = this.loadModels.bind(this);
     }
-    scrollToTop = () => {
-        scroll.scrollToTop();
-    };
+
     UNSAFE_componentWillReceiveProps(nextProps) {
-        if (this.props.codeBrand.inf !== nextProps.codeBrand.inf) {
-            let { codeBrand, brand, model } = nextProps.codeBrand.inf;
+        if (this.props.codeBrand !== nextProps.codeBrand) {
+            let { codeBrand, brand, model } = nextProps;
             if (codeBrand !== "" && brand !== "") {
                 console.log('não é vazio')
-                this.loadModels(1, model, codeBrand);
+                this.loadModels(model, codeBrand);
                 this.setState({ brand: Object.keys(brand).join() })
             }
 
@@ -36,18 +35,11 @@ export default class ListModel extends Component {
 
     };
 
-    loadModels = async (page = 1, model, codeBrand) => {
-        this.setState({ loading: true })
-        var headersConfig = {
-            headers: {
-                "Content-Type": "application/json",
-            }
-        };
-
-        const response = await trackPromise(api.post(`/list-model-brand-fipe/`, { "codigoMarca": codeBrand, "modelo": model, "page": page, "isMobile": (isMobile === true) ? true : false }, headersConfig));
-        console.log(response);
-        const { docs, ...modelsInfo } = response.data;
-        this.setState({ models: docs, modelsInfo, page, loading: false });
+    loadModels = async (model, codeBrand) => {
+        this.setState({ loading: true });
+        const response = await trackPromise(api.get(`/${model}/marcas/${codeBrand}/modelos`));
+        const { modelos } = response.data;
+        this.setState({ models: modelos, loading: false });
     };
 
     setModel(codeModelSelected, name, event) {
@@ -58,8 +50,19 @@ export default class ListModel extends Component {
         this.setState({ codeModelSelected, active: selected });
     };
 
+    scrollToTop = () => {
+        scroll.scrollToTop();
+    };
+
+    paginate(pageNumber) {
+        this.setState({ currentPage: pageNumber });
+    };
+
     render() {
-        const { models, page, modelInfo, brand, loading } = this.state;
+        const { models, brand, currentPage, modelsParPage, loading } = this.state;
+        const indexOfLastBrand = currentPage * modelsParPage;
+        const indexOfFirstPost = indexOfLastBrand - modelsParPage;
+        const currentModels = models.slice(indexOfFirstPost, indexOfLastBrand);
         return (
 
             <div className="main-category">
@@ -77,7 +80,7 @@ export default class ListModel extends Component {
                                         <section className="children models">
                                             {loading ? <LoadingIndicator /> :
                                                 <div className="content-models">
-                                                    {models.map(model => (
+                                                    {currentModels.map(model => (
                                                         <div key={model.codigo} onClick={this.setModel.bind(this, model.codigo, model.nome)}
                                                             className={(this.state.active[model.nome] !== undefined) ? `model-${model.nome} item ` + this.state.active[model.nome] : `model-${model.nome} item`}>
                                                             <div className="description">
@@ -106,6 +109,11 @@ export default class ListModel extends Component {
                                         </section>
                                     }
                                 </div>
+                                <Pagination
+                                    itemPerPage={modelsParPage}
+                                    totalItens={models.length}
+                                    paginate={this.paginate.bind(this)}
+                                />
                             </div>
                         </div>
                     </div>
