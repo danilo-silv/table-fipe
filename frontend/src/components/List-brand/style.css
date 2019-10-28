@@ -62,9 +62,6 @@ aside .sidebar-wrapper {
     margin: 0;
 }
 
-.sidebar-content {
-    display: inline-grid;
-}
 
 .sidebar-title .title:hover {
     color: #29df93;

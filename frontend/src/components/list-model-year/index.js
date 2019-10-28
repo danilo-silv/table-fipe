@@ -75,46 +75,47 @@ export default class ListModelYear extends Component {
                                     <div className="sidebar-title">
                                         <p className="title">{modelSelected}</p>
                                     </div>
-                                    <div className="sidebar-content">
-                                        <div className="models-year">
-                                            <section className="children">
-                                                {loading ? <LoadingIndicator /> :
-                                                    <div className="sidebar-content">
-                                                        <section className="children">
-                                                            <div className="content-brands">
-                                                                {currentModels.map(model => (
-                                                                    <div key={model.codigo} onClick={this.setModel.bind(this, model.codigo, model.nome)}
-                                                                        className={(this.state.active[model.nome] !== undefined) ? `model-${model.nome} item ` + this.state.active[model.nome] : `model-${model.nome} item `}>
-                                                                        <strong>Ano</strong><br />
-                                                                        <span>{model.nome}</span><br />
-                                                                        <p className="button-scroll">
-                                                                            <Link
-                                                                                activeClass="active"
-                                                                                to="year"
-                                                                                spy={true}
-                                                                                smooth={true}
-                                                                                offset={-70}
-                                                                                duration={500}
+                                    <div className="models-year">
+                                        <section className="children">
+                                            {loading ? <LoadingIndicator /> :
+                                                <div className="sidebar-content">
+                                                    <section className="children">
+                                                        <div className="content-brands">
+                                                            {currentModels.map(model => (
+                                                                <div key={model.codigo} onClick={this.setModel.bind(this, model.codigo, model.nome)}
+                                                                    className={(this.state.active[model.nome] !== undefined) ? `model-${model.nome} item ` + this.state.active[model.nome] : `model-${model.nome} item `}>
+                                                                    <strong>Ano</strong><br />
+                                                                    <span>{model.nome}</span><br />
+                                                                    <p className="button-scroll">
+                                                                        <Link
+                                                                            activeClass="active"
+                                                                            to="vehicle"
+                                                                            spy={true}
+                                                                            smooth={true}
+                                                                            offset={-70}
+                                                                            duration={500}
+                                                                        >
+                                                                            <button
+                                                                                onClick={() => { this.props.yearSelected(model.codigo) }}
                                                                             >
-                                                                                <button
-                                                                                >Ver modelo</button>
+                                                                                Ver modelo
+                                                                                </button>
 
-                                                                            </Link>
-                                                                        </p>
-                                                                    </div>
-                                                                ))}
-                                                            </div>
-                                                        </section>
-                                                        <Pagination
-                                                            itemPerPage={modelsParPage}
-                                                            totalItens={models.length}
-                                                            paginate={this.paginate.bind(this)}
-                                                            currentPage={currentPage}
-                                                        />
-                                                    </div>
-                                                }
-                                            </section>
-                                        </div>
+                                                                        </Link>
+                                                                    </p>
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    </section>
+                                                    <Pagination
+                                                        itemPerPage={modelsParPage}
+                                                        totalItens={models.length}
+                                                        paginate={this.paginate.bind(this)}
+                                                        currentPage={currentPage}
+                                                    />
+                                                </div>
+                                            }
+                                        </section>
                                     </div>
                                 </div>
                             </div>

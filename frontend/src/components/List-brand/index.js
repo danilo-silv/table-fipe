@@ -4,6 +4,7 @@ import ListModel from "../List-model/index";
 import LoadingIndicator from "../Loading/index";
 import ListModelYear from "../List-model-year/index";
 import Pagination from "../Pagination/index";
+import Vehicle from "../Vehicle/index";
 import api from "../../service/index";
 import "./style.css";
 export default class TableFipe extends Component {
@@ -17,7 +18,9 @@ export default class TableFipe extends Component {
             active: {},
             modelo: '',
             loading: false,
-            modeloSelected: "",
+            modelSelected: "",
+            yearSelected: "",
+
 
         }
 
@@ -35,9 +38,17 @@ export default class TableFipe extends Component {
 
     async loadBrands(modelo) {
         this.setState({ loading: true });
-        const response = await api.get(`/${modelo}/marcas`);
-        const { data } = response;
-        this.setState({ brands: data, loading: false });
+        await api.get(`/${modelo}/marcas`)
+            .then((response) => {
+                const { data } = response;
+                this.setState({ brands: data, loading: false });
+            }).catch((erro) => {
+                let resp = window.confirm('tivemos um problema ao consultar marcas do veiculo\n Deseja voltar a tela inicial?');
+                if (resp) {
+                    this.props.navigation.navigate("/");
+                }
+            })
+
     };
 
 
@@ -50,8 +61,11 @@ export default class TableFipe extends Component {
     };
 
 
-    modelYear(modeloSelected) {
-        this.setState({ modeloSelected });
+    modelYear(modelSelected) {
+        this.setState({ modelSelected });
+    };
+    yearSelected(yearSelected) {
+        this.setState({ yearSelected });
     };
     paginate(pageNumber) {
         this.setState({ currentPage: pageNumber });
@@ -59,7 +73,7 @@ export default class TableFipe extends Component {
 
 
     render() {
-        const { brands, currentPage, brandsParPage, loading, brandSelected, modelo, active, modeloSelected } = this.state;
+        const { brands, currentPage, brandsParPage, loading, brandSelected, modelo, active, modelSelected, yearSelected } = this.state;
         const indexOfLastBrand = currentPage * brandsParPage;
         const indexOfFirstPost = indexOfLastBrand - brandsParPage;
         const currentBrands = brands.slice(indexOfFirstPost, indexOfLastBrand);
@@ -109,7 +123,11 @@ export default class TableFipe extends Component {
                     />
                 </div>
                 <div className="model-year">
-                    <ListModelYear data={{ "vehicle": modeloSelected, "modelo": modelo, "codeBrand": brandSelected }} />
+                    <ListModelYear data={{ "vehicle": modelSelected, "modelo": modelo, "codeBrand": brandSelected }}
+                        yearSelected={this.yearSelected.bind(this)} />
+                </div>
+                <div className="vehicle">
+                    <Vehicle data={{ "vehicle": modelSelected, "modelo": modelo, "codeBrand": brandSelected, "year": yearSelected }} />
                 </div>
             </div>
         )
