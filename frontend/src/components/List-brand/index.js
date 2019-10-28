@@ -42,13 +42,10 @@ export default class TableFipe extends Component {
             .then((response) => {
                 const { data } = response;
                 this.setState({ brands: data, loading: false });
-            }).catch((erro) => {
-                let resp = window.confirm('tivemos um problema ao consultar marcas do veiculo\n Deseja voltar a tela inicial?');
-                if (resp) {
-                    this.props.navigation.navigate("/");
-                }
+            }).catch(() => {
+                // window.alert(`tivemos um problema ao consultar marcas de ${modelo}\nPor favor tente mais tarde!!`);
+                // this.props.history.push('/');
             })
-
     };
 
 

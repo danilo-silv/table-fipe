@@ -8,7 +8,17 @@ export default class Vehicle extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            vehicle: '',
+            vehicle: {
+                "Valor": "R$ 20.897,00",
+                "Marca": "GM - Chevrolet",
+                "Modelo": "Vectra Elegance 2.2 MPFI 16V Aut.",
+                "AnoModelo": 2005,
+                "Combustivel": "Gasolina",
+                "CodigoFipe": "004298-6",
+                "MesReferencia": "outubro de 2019 ",
+                "TipoVeiculo": 1,
+                "SiglaCombustivel": "G"
+            },
             loading: false,
         };
         this.loadModelsYear = this.loadModelsYear.bind(this);
@@ -40,7 +50,7 @@ export default class Vehicle extends Component {
                     :
                     <div className="model-vehicle">
                         <div className="title-category">
-                            <h1>Veículo</h1>
+                            <h1>Dados do Veículo</h1>
                         </div>
                         <aside className="sidebar">
                             <div className="sidebar-model">
@@ -48,23 +58,41 @@ export default class Vehicle extends Component {
                                     <div className="sidebar-title">
                                         <p className="title">{vehicle.Modelo}</p>
                                     </div>
-                                    <div className="sidebar-content">
-                                        <div className="models-year">
-                                            <section className="children">
-                                                {loading ? <LoadingIndicator /> :
-                                                    <div className="sidebar-content">
-                                                        <section className="children">
-                                                            <div className="content-brands">
-                                                                <div className="item">
-
-                                                                </div>
-                                                            </div>
-                                                        </section>
+                                    {loading ? <LoadingIndicator /> :
+                                        <section className="children-vehicle">
+                                            <div className="description-vehicle">
+                                                <div className="flex">
+                                                    <div className="data">
+                                                        <p className="brand">
+                                                            <strong>{vehicle.Marca} </strong>
+                                                        </p>
+                                                        <p className="name">
+                                                            {vehicle.Modelo}
+                                                        </p>
                                                     </div>
-                                                }
-                                            </section>
-                                        </div>
-                                    </div>
+                                                    <div className="info-additional">
+
+                                                        <p className="code-fipe">
+                                                            <small>Ano: {vehicle.AnoModelo},<br />  Codigo fipe: {vehicle.CodigoFipe}</small>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div className="info-price">
+                                                    <p className="price">
+                                                        <strong>{vehicle.Valor} </strong>
+                                                    </p>
+                                                    <p>
+                                                        mês ref: {vehicle.MesReferencia}
+                                                    </p>
+                                                    <p className="fuel">
+                                                        <em>
+                                                            {vehicle.Combustivel} - {vehicle.SiglaCombustivel}
+                                                        </em>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    }
                                 </div>
                             </div>
                         </aside>

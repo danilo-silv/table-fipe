@@ -11,12 +11,14 @@ export default class TableFipe extends Component {
 
     render() {
         const { modelo } = this.state;
+        console.log(this.props);
         return (
             <main className="main" >
                 <Header />
                 <div className="table-fipe" >
                     <BannerTableFipe />
-                    <ListBrand modelo={modelo} />
+                    <ListBrand modelo={modelo}
+                        history={this.props.history} />
                 </div>
             </main>
 

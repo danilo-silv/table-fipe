@@ -1,7 +1,6 @@
 .model-year {
     width: 100%;
-    margin: 20px auto 0;
-    padding: 0 20px;
+    margin: 80px auto 0;
 }
 
 .content-year {
@@ -30,4 +29,11 @@
     font-weight: 600;
     cursor: pointer;
     transition: color 0.5s, border 0.5s;
+}
+
+@media screen and (max-width: 800px) {
+    .model-year {
+        padding: 0px;
+        width: auto;
+    }
 }
