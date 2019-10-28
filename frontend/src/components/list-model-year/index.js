@@ -1,9 +1,11 @@
 import React, { Component } from "react";
+import LoadingIndicator from "../Loading/index";
+import Pagination from "../Pagination/index";
+import { Link, animateScroll as scroll } from "react-scroll";
 import { isMobile } from 'react-device-detect';
-import "./style.css";
 import { trackPromise } from 'react-promise-tracker';
 import api from "../../service/index";
-import LoadingIndicator from "../Loading/index";
+import "./style.css";
 
 export default class ListModelYear extends Component {
     constructor(props) {
@@ -16,8 +18,6 @@ export default class ListModelYear extends Component {
             active: {},
             loading: false,
         }
-        // this.setModel = this.setModel.bind(this);
-        // this.loadModels = this.loadModels.bind(this);
         this.loadModelsYear = this.loadModelsYear.bind(this);
     };
     UNSAFE_componentWillReceiveProps(nextProps) {
@@ -31,25 +31,39 @@ export default class ListModelYear extends Component {
         }
 
     };
-    // componentDidMount() {
-    //     console.log(data);
-    //     this.setState({ modelo })
-    //     this.loadBrands(1, modelo);
-    // };
 
     loadModelsYear = async (model, codeBrand, codigo) => {
         this.setState({ loading: true });
         const response = await trackPromise(api.get(`/${model}/marcas/${codeBrand}/modelos/${codigo}/anos`));
         console.log(response);
-        const { modelos } = response.data;
-        this.setState({ models: modelos, loading: false });
+        const { data } = response;
+        this.setState({ models: data, loading: false });
+    };
+
+    setModel(codeModelSelected, name, event) {
+        let selected = this.state.active;
+        selected = {};
+        let selectedCircles = selected[name] === "active-brd" ? "" : "active-brd";
+        selected[name] = selectedCircles;
+        this.setState({ codeModelSelected, active: selected });
+    };
+
+    scrollToTop = () => {
+        scroll.scrollToTop();
+    };
+
+    paginate(pageNumber) {
+        this.setState({ currentPage: pageNumber });
     };
 
     render() {
-        const { modelSelected } = this.state;
+        const { models, currentPage, modelsParPage, loading, modelSelected } = this.state;
+        const indexOfLastBrand = currentPage * modelsParPage;
+        const indexOfFirstPost = indexOfLastBrand - modelsParPage;
+        const currentModels = models.slice(indexOfFirstPost, indexOfLastBrand);
         return (
-            <div className="content-year">
-                {modelSelected == "" ? null
+            <div className="content-year" id="year">
+                {modelSelected === "" ? null
                     :
                     <div className="model-years">
                         <div className="title-category">
@@ -63,18 +77,51 @@ export default class ListModelYear extends Component {
                                     </div>
                                     <div className="sidebar-content">
                                         <div className="models-year">
-                                            <p>Selecione uma marca</p>
+                                            <section className="children">
+                                                {loading ? <LoadingIndicator /> :
+                                                    <div className="sidebar-content">
+                                                        <section className="children">
+                                                            <div className="content-brands">
+                                                                {currentModels.map(model => (
+                                                                    <div key={model.codigo} onClick={this.setModel.bind(this, model.codigo, model.nome)}
+                                                                        className={(this.state.active[model.nome] !== undefined) ? `model-${model.nome} item ` + this.state.active[model.nome] : `model-${model.nome} item `}>
+                                                                        <strong>Ano</strong><br />
+                                                                        <span>{model.nome}</span><br />
+                                                                        <p className="button-scroll">
+                                                                            <Link
+                                                                                activeClass="active"
+                                                                                to="year"
+                                                                                spy={true}
+                                                                                smooth={true}
+                                                                                offset={-70}
+                                                                                duration={500}
+                                                                            >
+                                                                                <button
+                                                                                >Ver modelo</button>
+
+                                                                            </Link>
+                                                                        </p>
+                                                                    </div>
+                                                                ))}
+                                                            </div>
+                                                        </section>
+                                                        <Pagination
+                                                            itemPerPage={modelsParPage}
+                                                            totalItens={models.length}
+                                                            paginate={this.paginate.bind(this)}
+                                                            currentPage={currentPage}
+                                                        />
+                                                    </div>
+                                                }
+                                            </section>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </aside>
                     </div>
-
-
                 }
             </div>
-
         )
     }
 };

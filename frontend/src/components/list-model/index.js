@@ -51,7 +51,7 @@ export default class ListModel extends Component {
     };
 
     scrollToTop = () => {
-        scroll.scrollToTop();
+        scroll.scrollToTop({ block: 'end', behavior: 'smooth' });
     };
 
     paginate(pageNumber) {
@@ -64,8 +64,6 @@ export default class ListModel extends Component {
         const indexOfFirstPost = indexOfLastBrand - modelsParPage;
         const currentModels = models.slice(indexOfFirstPost, indexOfLastBrand);
         return (
-
-
             <aside className="sidebar">
                 <div className="sidebar-model">
                     <div className="sidebar-widget widget_categories">
@@ -95,9 +93,10 @@ export default class ListModel extends Component {
                                                                 spy={true}
                                                                 smooth={true}
                                                                 offset={-70}
-                                                                duration={500}
+                                                                duration={800}
                                                             >
-                                                                <button onClick={() => { this.props.modelYear(model) }}
+                                                                <button
+                                                                    onClick={() => {this.setModel.bind(this, model.codigo, model.nome); this.props.modelYear(model); }}
                                                                 >Veja anos do modelo</button>
 
                                                             </Link>
@@ -108,6 +107,7 @@ export default class ListModel extends Component {
                                                     itemPerPage={modelsParPage}
                                                     totalItens={models.length}
                                                     paginate={this.paginate.bind(this)}
+                                                    currentPage={currentPage}
                                                 />
                                             </div>
                                         }

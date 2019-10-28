@@ -56,7 +56,7 @@ h2.title strong {
     font-weight: 700;
 }
 
-.children.models button {
+.children button {
     font-size: 0.65em;
     font-feature-settings: "pcap";
     font-variant: petite-caps;
@@ -75,7 +75,7 @@ h2.title strong {
     outline: none;
 }
 
-.children.models button:hover {
+.children button:hover {
     border-color: #29df93;
     background-color: #29df93;
 }
@@ -83,9 +83,6 @@ h2.title strong {
 @media screen and (max-width: 850px) {
     .models p.check {
         padding: 79px 88px;
-    }
-    .sidebar-model {
-        width: auto;
     }
     section.children.models .item {
         width: 66px;
@@ -97,7 +94,7 @@ h2.title strong {
         padding: 0px;
     }
     .models {
-        width: 290px;
+        width: auto;
     }
     div.description h2.title {
         font-size: 11px;

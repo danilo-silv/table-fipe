@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import Header from "../../components/Header";
 import BannerTableFipe from "../../components/BannerTableFipe";
-import ListBrand from "../../components/List-brand"
+import ListBrand from "../../components/List-brand";
 import "./style.css";
 
 export default class TableFipe extends Component {
@@ -11,12 +12,14 @@ export default class TableFipe extends Component {
     render() {
         const { modelo } = this.state;
         return (
-            <div className="table-fipe" >
-                <main className="main" >
+            <main className="main" >
+                <Header />
+                <div className="table-fipe" >
                     <BannerTableFipe />
                     <ListBrand modelo={modelo} />
-                </main>
-            </div>
+                </div>
+            </main>
+
         )
     }
 };

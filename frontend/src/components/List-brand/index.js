@@ -17,7 +17,7 @@ export default class TableFipe extends Component {
             active: {},
             modelo: '',
             loading: false,
-            modeloSelected: {},
+            modeloSelected: "",
 
         }
 
@@ -59,7 +59,7 @@ export default class TableFipe extends Component {
 
 
     render() {
-        const { brands, currentPage, brandsParPage, loading, brandSelected, modelo, active } = this.state;
+        const { brands, currentPage, brandsParPage, loading, brandSelected, modelo, active, modeloSelected } = this.state;
         const indexOfLastBrand = currentPage * brandsParPage;
         const indexOfFirstPost = indexOfLastBrand - brandsParPage;
         const currentBrands = brands.slice(indexOfFirstPost, indexOfLastBrand);
@@ -91,6 +91,7 @@ export default class TableFipe extends Component {
                                             itemPerPage={brandsParPage}
                                             totalItens={brands.length}
                                             paginate={this.paginate.bind(this)}
+                                            currentPage={currentPage}
                                         />
                                     </div>
                                 }
@@ -107,8 +108,8 @@ export default class TableFipe extends Component {
                         modelYear={this.modelYear.bind(this)}
                     />
                 </div>
-                <div className="model-year" id="year">
-                    <ListModelYear data={{ "vehicle": this.state.modeloSelected, "modelo": modelo, "codeBrand": brandSelected }} />
+                <div className="model-year">
+                    <ListModelYear data={{ "vehicle": modeloSelected, "modelo": modelo, "codeBrand": brandSelected }} />
                 </div>
             </div>
         )

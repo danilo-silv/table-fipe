@@ -94,6 +94,7 @@ section.children .item {
     transition: color 0.5s, border 0.5s;
     cursor: pointer;
     color: #999;
+    text-align: center;
 }
 
 section.children .item span {
@@ -110,7 +111,7 @@ div.active-brd {
 
 .model-brand {
     max-width: 1126px;
-    margin: 0 auto 200px;
+    margin: 0 auto 100px;
 }
 
 @media screen and (max-width: 800px) {
@@ -138,5 +139,3 @@ div.active-brd {
         padding: 20px;
     }
 }
-
-/* icones */
