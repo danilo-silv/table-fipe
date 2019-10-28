@@ -41,6 +41,19 @@ export default class Vehicle extends Component {
         this.setState({ vehicle: data, loading: false });
     };
 
+    setFavorite(vehicle) {
+        console.log(vehicle);
+        let dateLocal = localStorage['ArrayFavorite'];
+        if (dateLocal != undefined) {
+            let newVehicle = JSON.parse(dateLocal);
+            newVehicle.push(vehicle);
+            localStorage['ArrayFavorite'] = JSON.stringify(newVehicle);
+        } else {
+            let ArrayFavorite = [vehicle];
+            localStorage['ArrayFavorite'] = JSON.stringify(ArrayFavorite);
+        }
+    }
+
     render() {
         const { vehicle, loading } = this.state;
         return (
@@ -90,6 +103,9 @@ export default class Vehicle extends Component {
                                                         </em>
                                                     </p>
                                                 </div>
+                                            </div>
+                                            <div className="save-favorite">
+                                                <p onClick={this.setFavorite.bind(this, vehicle)} className="content-icon">salvar</p>
                                             </div>
                                         </section>
                                     }
