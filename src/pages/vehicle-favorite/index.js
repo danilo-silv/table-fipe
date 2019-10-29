@@ -42,7 +42,7 @@ export default class VehicleFavorite extends Component {
                                     <h1>Lista de veículos favoritos</h1>
                                 </div>
                                 {vehicle.map(vehicle => (
-                                    <aside className="sidebar" key={Math.floor(Math.random() * 10)}>
+                                    <aside className="sidebar" key={Math.floor(Math.random() * vehicle.AnoModelo)}>
                                         <div className="sidebar-model">
                                             <div className="sidebar-widget widget_categories">
                                                 <div className="sidebar-title">
