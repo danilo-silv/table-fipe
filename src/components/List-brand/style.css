@@ -94,7 +94,7 @@ section.children .item {
 }
 
 section.children .item span {
-    font-size: 10px;
+    font-size: 9px;
     color: inherit;
     margin-top: 5px;
     line-height: 15px;
@@ -128,7 +128,7 @@ div.active-brd {
         width: 64px;
     }
     section.children .item span {
-        font-size: 8px;
+        font-size: 7px;
     }
     section.children {
         max-width: 364px;

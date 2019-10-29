@@ -24,8 +24,12 @@ export default class ListModel extends Component {
 
     UNSAFE_componentWillReceiveProps(nextProps) {
         if (this.props.codeBrand !== nextProps.codeBrand) {
+            console.log('entrou');
+            console.log(this.props);
+            console.log(nextProps);
             let { codeBrand, brand, model } = nextProps;
             if (codeBrand !== "" && brand !== "") {
+                console.log('fez');
                 this.loadModels(model, codeBrand);
                 this.setState({ brand: Object.keys(brand).join() })
             }
@@ -39,6 +43,7 @@ export default class ListModel extends Component {
         await trackPromise(api.get(`/${model}/marcas/${codeBrand}/modelos`))
             .then((response) => {
                 const { modelos } = response.data;
+                console.log(response);
                 this.setState({ models: modelos, loading: false });
             }).catch(() => {
                 window.alert(`tivemos um problema ao consultar marcas de ${model}\nPor favor tente mais tarde!!`);

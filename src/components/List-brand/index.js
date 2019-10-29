@@ -51,7 +51,8 @@ export default class TableFipe extends Component {
         await trackPromise(api.get(`/${modelo}/marcas`))
             .then((response) => {
                 const { data } = response;
-                this.setState({ brands: data, loading: false });
+                console.log(data);
+                this.setState({ brands: data, loading: false, currentPage: 1 });
             }).catch(() => {
                 window.alert(`tivemos um problema ao consultar marcas de ${modelo}\nPor favor tente mais tarde!!`);
                 this.location('/');

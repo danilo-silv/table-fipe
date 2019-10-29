@@ -46,10 +46,8 @@ export default class Vehicle extends Component {
             let ArrayFavorite = [vehicle];
             localStorage['ArrayFavorite'] = JSON.stringify(ArrayFavorite);
         }
-        let resp = window.confirm(`Veiculo ( ${vehicle.Modelo} ) Salvo na lista de favoritos!!\nDeseja ver seus veículos favoritados?`);
-        if (resp) {
-            this.props.location('/favoritos');
-        }
+        window.alert(`Veiculo ( ${vehicle.Modelo} ) Salvo na lista de favoritos!!\nAcesse a Lista de veículos favoritos clicando em favoritos no menu.`);
+
     }
 
     render() {

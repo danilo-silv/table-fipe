@@ -8,44 +8,43 @@ const Header = ({ history, model }) => {
             <nav id="menu">
                 <ul>
                     <li>
-                        <p onClick={() => { model({ 'modelo': "carros" }) }}>
-                            <Link
-                                activeClass="active"
-                                to="brands"
-                                spy={true}
-                                smooth={true}
-                                offset={-70}
-                                duration={800}>
-                                carros
-                            </Link>
-
-                        </p>
-                    </li>
-                    <li> <p onClick={() => { model({ 'modelo': "motos" }) }}>
                         <Link
                             activeClass="active"
                             to="brands"
                             spy={true}
                             smooth={true}
                             offset={-70}
-                            duration={800}>
+                            duration={800}
+                            onClick={() => { model({ 'modelo': "carros" }) }}>
+                            carros
+                            </Link>
+                    </li>
+                    <li>
+                        <Link
+                            activeClass="active"
+                            to="brands"
+                            spy={true}
+                            smooth={true}
+                            offset={-70}
+                            duration={800}
+                            onClick={() => { model({ 'modelo': "motos" }) }}>
                             motos
                             </Link>
-                    </p>
+
                     </li>
-                    <li> <p onClick={() => { model({ 'modelo': "caminhoes" }) }}>
+                    <li>
                         <Link
                             activeClass="active"
                             to="brands"
                             spy={true}
                             smooth={true}
                             offset={-70}
-                            duration={800}>
+                            duration={800}
+                            onClick={() => { model({ 'modelo': "caminhoes" }) }}>
                             caminhões
                             </Link>
-                    </p>
                     </li>
-                    <li> <p onClick={() => { history.push('/favoritos') }}>Favoritos</p></li>
+                    <li> <a onClick={() => { history.push('/favoritos') }}>Favoritos</a></li>
                 </ul>
             </nav>
             <div className="logo-laborit">

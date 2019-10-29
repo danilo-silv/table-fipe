@@ -17,13 +17,14 @@ export default class VehicleFavorite extends Component {
         let dateLocal = localStorage['ArrayFavorite'];
         let vehicleFavorite = JSON.parse(dateLocal);
         let newVehicle = vehicleFavorite.filter((vehicle) => {
-            return vehicle.Modelo !== vehicleDelete.Modelo;
+            return vehicle.CodigoFipe !== vehicleDelete.CodigoFipe;
         });
+        console.log(newVehicle);
         localStorage['ArrayFavorite'] = JSON.stringify(newVehicle);
         this.setState({ vehicle: newVehicle });
     };
     location() {
-        this.props.history.push('/');
+        this.props.history.goBack();
     }
 
     render() {
@@ -42,7 +43,7 @@ export default class VehicleFavorite extends Component {
                                     <h1>Lista de veículos favoritos</h1>
                                 </div>
                                 {vehicle.map(vehicle => (
-                                    <aside className="sidebar" key={vehicle.AnoModelo}>
+                                    <aside className="sidebar" key={Math.floor(Math.random() * 10)}>
                                         <div className="sidebar-model">
                                             <div className="sidebar-widget widget_categories">
                                                 <div className="sidebar-title">
