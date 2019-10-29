@@ -34,11 +34,18 @@ export default class ListModel extends Component {
 
     };
 
-    loadModels = async (model, codeBrand) => {
+    async loadModels(model, codeBrand) {
         this.setState({ loading: true });
-        const response = await trackPromise(api.get(`/${model}/marcas/${codeBrand}/modelos`));
-        const { modelos } = response.data;
-        this.setState({ models: modelos, loading: false });
+        await trackPromise(api.get(`/${model}/marcas/${codeBrand}/modelos`))
+            .then((response) => {
+                const { modelos } = response.data;
+                this.setState({ models: modelos, loading: false });
+            }).catch(() => {
+                window.alert(`tivemos um problema ao consultar marcas de ${model}\nPor favor tente mais tarde!!`);
+                this.props.location('/');
+            })
+
+
     };
 
     setModel(codeModelSelected, name, event) {

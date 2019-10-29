@@ -32,11 +32,17 @@ export default class ListModelYear extends Component {
 
     };
 
-    loadModelsYear = async (model, codeBrand, codigo) => {
+    async loadModelsYear(model, codeBrand, codigo) {
         this.setState({ loading: true });
-        const response = await trackPromise(api.get(`/${model}/marcas/${codeBrand}/modelos/${codigo}/anos`));
-        const { data } = response;
-        this.setState({ models: data, loading: false });
+        await trackPromise(api.get(`/${model}/marcas/${codeBrand}/modelos/${codigo}/anos`))
+            .then((response) => {
+                const { data } = response;
+                this.setState({ models: data, loading: false });
+            }).catch(() => {
+                window.alert(`tivemos um problema ao consultar modelos de ${model}\nPor favor tente mais tarde!!`);
+                this.props.location('/');
+            })
+
     };
 
     setModel(codeModelSelected, name, event) {
@@ -60,7 +66,6 @@ export default class ListModelYear extends Component {
         const indexOfLastBrand = currentPage * modelsParPage;
         const indexOfFirstPost = indexOfLastBrand - modelsParPage;
         const currentModels = models.slice(indexOfFirstPost, indexOfLastBrand);
-        console.log('executou');
         return (
             <div className="content-year" id="year">
                 {modelSelected === "" ? null

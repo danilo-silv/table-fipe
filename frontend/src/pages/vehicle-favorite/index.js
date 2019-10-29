@@ -12,7 +12,6 @@ export default class VehicleFavorite extends Component {
     componentDidMount() {
         let vehicle = localStorage['ArrayFavorite'];
         this.setState({ vehicle: JSON.parse(vehicle) });
-        console.log(this.props);
     };
     deleteFavorite(vehicleDelete) {
         let dateLocal = localStorage['ArrayFavorite'];
@@ -24,13 +23,11 @@ export default class VehicleFavorite extends Component {
         this.setState({ vehicle: newVehicle });
     };
     location() {
-        console.log(this.props);
         this.props.history.push('/');
     }
 
     render() {
         const { vehicle } = this.state;
-        console.log(vehicle)
         return (
             <main className="main-fovorite">
                 <div className="vehicle-favorite">

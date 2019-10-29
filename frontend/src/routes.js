@@ -3,7 +3,7 @@ import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Home from "./pages/home";
 import TableFipe from "./pages/table-fipe";
-import VehicleFavorite from "./pages/vehivle-favorite";
+import VehicleFavorite from "./pages/vehicle-favorite";
 
 const Routes = () => (
     <BrowserRouter>

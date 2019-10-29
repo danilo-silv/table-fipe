@@ -5,15 +5,24 @@ import ListBrand from "../../components/List-brand";
 import "./style.css";
 
 export default class TableFipe extends Component {
-    state = {
-        modelo: this.props.location.state
+    constructor(props) {
+        super(props);
+        this.state = {
+            modelo: this.props.location.state
+        }
+        this.model = this.model.bind(this);
     }
 
+    model(modelo) {
+        this.setState({ modelo });
+    }
     render() {
         const { modelo } = this.state;
+        console.log(modelo);
         return (
             <main className="main" >
-                <Header />
+                <Header history={this.props.history}
+                    model={this.model.bind(this)} />
                 <div className="table-fipe" >
                     <BannerTableFipe />
                     <ListBrand modelo={modelo}

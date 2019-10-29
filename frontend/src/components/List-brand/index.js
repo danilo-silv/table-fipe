@@ -31,12 +31,21 @@ export default class TableFipe extends Component {
     };
 
 
-    componentDidMount() {
-        const { modelo } = this.props.modelo;
-        this.setState({ modelo })
-        this.loadBrands(modelo);
+    UNSAFE_componentWillReceiveProps(nextProps) {
+        console.log('veio')
+        if (this.props.modelo !== nextProps.modelo) {
+            let { modelo } = nextProps.modelo;
+            this.setState({ modelo })
+            this.loadBrands(modelo);
+        }
+
     };
 
+    componentDidMount() {
+        let { modelo } = this.props.modelo;
+        this.setState({ modelo });
+        this.loadBrands(modelo);
+    };
     async loadBrands(modelo) {
         this.setState({ loading: true });
         await trackPromise(api.get(`/${modelo}/marcas`))
@@ -44,8 +53,8 @@ export default class TableFipe extends Component {
                 const { data } = response;
                 this.setState({ brands: data, loading: false });
             }).catch(() => {
-                // window.alert(`tivemos um problema ao consultar marcas de ${modelo}\nPor favor tente mais tarde!!`);
-                // this.props.history.push('/');
+                window.alert(`tivemos um problema ao consultar marcas de ${modelo}\nPor favor tente mais tarde!!`);
+                this.location('/');
             })
     };
 
@@ -83,9 +92,8 @@ export default class TableFipe extends Component {
         const indexOfLastBrand = currentPage * brandsParPage;
         const indexOfFirstPost = indexOfLastBrand - brandsParPage;
         const currentBrands = brands.slice(indexOfFirstPost, indexOfLastBrand);
-        console.log(modelSelected);
         return (
-            <div className="main-category">
+            <div className="main-category" id="brands">
                 <div className="filter-brand">
                     <aside className="sidebar-brand">
                         <div className="sidebar-wrapper">
@@ -136,13 +144,14 @@ export default class TableFipe extends Component {
                         model={modelo}
                         brand={active}
                         modelYear={this.modelYear.bind(this)}
+                        location={this.location.bind(this)}
                     />
                 </div>
                 {brandSelected !== "" ?
                     <div className="col-models">
                         <div className="model-year">
                             <ListModelYear data={{ "vehicle": modelSelected, "modelo": modelo, "codeBrand": brandSelected }}
-                                yearSelected={this.yearSelected.bind(this)} />
+                                yearSelected={this.yearSelected.bind(this)} location={this.location.bind(this)} />
                         </div>
                         <div className="vehicle" id="vehicle">
                             <Vehicle data={{ "vehicle": modelSelected, "modelo": modelo, "codeBrand": brandSelected, "year": yearSelected }}

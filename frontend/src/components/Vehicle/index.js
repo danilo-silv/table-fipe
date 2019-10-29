@@ -23,11 +23,17 @@ export default class Vehicle extends Component {
         }
     };
 
-    loadModelsYear = async (model, codeBrand, codigo, year) => {
+    async loadModelsYear(model, codeBrand, codigo, year) {
         this.setState({ loading: true });
-        const response = await trackPromise(api.get(`/${model}/marcas/${codeBrand}/modelos/${codigo}/anos/${year}`));
-        const { data } = response;
-        this.setState({ vehicle: data, loading: false });
+        await trackPromise(api.get(`/${model}/marcas/${codeBrand}/modelos/${codigo}/anos/${year}`))
+            .then((response) => {
+                const { data } = response;
+                this.setState({ vehicle: data, loading: false });
+            }).catch(() => {
+                window.alert(`tivemos um problema ao consultar modelos de ${model}\nPor favor tente mais tarde!!`);
+                this.props.location('/');
+            })
+
     };
 
     setFavorite(vehicle) {

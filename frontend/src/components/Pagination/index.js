@@ -12,13 +12,13 @@ const Pagination = ({ itemPerPage, totalItens, paginate, currentPage }) => {
             {pageNumbers.length > 1
                 ?
                 <ul className="pagination">
-                    <button className="button">❮</button>
+                    <button disabled={currentPage === 1} onClick={() => paginate(currentPage - 1)} className="button">❮</button>
                     {pageNumbers.map(number => (
                         <li key={number} className="page-item">
                             <a onClick={() => paginate(number)} className={(number === currentPage) ? 'page-link active' : 'page-link'}>{number}</a>
                         </li>
                     ))}
-                    <button className="button">❯</button>
+                    <button disabled={pageNumbers.length === currentPage} onClick={() => paginate(currentPage + 1)} className="button">❯</button>
                 </ul> : null
             }
 
