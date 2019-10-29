@@ -11,7 +11,6 @@ export default class TableFipe extends Component {
 
     render() {
         const { modelo } = this.state;
-        console.log(this.props);
         return (
             <main className="main" >
                 <Header />

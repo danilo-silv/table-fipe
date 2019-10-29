@@ -21,7 +21,7 @@ export default class ListModelYear extends Component {
         this.loadModelsYear = this.loadModelsYear.bind(this);
     };
     UNSAFE_componentWillReceiveProps(nextProps) {
-        if (this.props.data !== nextProps.data) {
+        if (this.props.data.vehicle !== nextProps.data.vehicle) {
             let { codeBrand, vehicle, modelo } = nextProps.data;
             if (vehicle.codigo !== undefined) {
                 this.loadModelsYear(modelo, codeBrand, vehicle.codigo);
@@ -35,7 +35,6 @@ export default class ListModelYear extends Component {
     loadModelsYear = async (model, codeBrand, codigo) => {
         this.setState({ loading: true });
         const response = await trackPromise(api.get(`/${model}/marcas/${codeBrand}/modelos/${codigo}/anos`));
-        console.log(response);
         const { data } = response;
         this.setState({ models: data, loading: false });
     };
@@ -61,6 +60,7 @@ export default class ListModelYear extends Component {
         const indexOfLastBrand = currentPage * modelsParPage;
         const indexOfFirstPost = indexOfLastBrand - modelsParPage;
         const currentModels = models.slice(indexOfFirstPost, indexOfLastBrand);
+        console.log('executou');
         return (
             <div className="content-year" id="year">
                 {modelSelected === "" ? null
@@ -93,9 +93,9 @@ export default class ListModelYear extends Component {
                                                                             spy={true}
                                                                             smooth={true}
                                                                             offset={-70}
-                                                                            duration={500}
+                                                                            duration={1000}
                                                                         >
-                                                                            <button
+                                                                            <button className="button-model"
                                                                                 onClick={() => { this.props.yearSelected(model.codigo) }}
                                                                             >
                                                                                 Ver modelo

@@ -62,7 +62,6 @@ aside .sidebar-wrapper {
     margin: 0;
 }
 
-
 .sidebar-title .title:hover {
     color: #29df93;
 }
@@ -109,6 +108,10 @@ div.active-brd {
 .model-brand {
     max-width: 1126px;
     margin: 0 auto 100px;
+}
+
+.col-models {
+    width: 100%;
 }
 
 @media screen and (max-width: 800px) {

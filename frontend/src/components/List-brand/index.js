@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { isMobile } from 'react-device-detect';
+import { trackPromise } from 'react-promise-tracker';
+import { Link, animateScroll as scroll } from "react-scroll";
 import ListModel from "../List-model/index";
 import LoadingIndicator from "../Loading/index";
 import ListModelYear from "../List-model-year/index";
@@ -35,10 +37,9 @@ export default class TableFipe extends Component {
         this.loadBrands(modelo);
     };
 
-
     async loadBrands(modelo) {
         this.setState({ loading: true });
-        await api.get(`/${modelo}/marcas`)
+        await trackPromise(api.get(`/${modelo}/marcas`))
             .then((response) => {
                 const { data } = response;
                 this.setState({ brands: data, loading: false });
@@ -48,6 +49,9 @@ export default class TableFipe extends Component {
             })
     };
 
+    location(local) {
+        this.props.history.push(local);
+    }
 
     setBrand(brandSelected, name, event) {
         let selected = this.state.active;
@@ -57,16 +61,21 @@ export default class TableFipe extends Component {
         this.setState({ brandSelected, active: selected });
     };
 
-
     modelYear(modelSelected) {
         this.setState({ modelSelected });
     };
+
     yearSelected(yearSelected) {
         this.setState({ yearSelected });
     };
+
     paginate(pageNumber) {
         this.setState({ currentPage: pageNumber });
-    }
+    };
+
+    scrollToTop = () => {
+        scroll.scrollToTop();
+    };
 
 
     render() {
@@ -74,6 +83,7 @@ export default class TableFipe extends Component {
         const indexOfLastBrand = currentPage * brandsParPage;
         const indexOfFirstPost = indexOfLastBrand - brandsParPage;
         const currentBrands = brands.slice(indexOfFirstPost, indexOfLastBrand);
+        console.log(modelSelected);
         return (
             <div className="main-category">
                 <div className="filter-brand">
@@ -90,10 +100,19 @@ export default class TableFipe extends Component {
 
                                             <div className="content-brands">
                                                 {currentBrands.map(brand => (
-                                                    <div key={brand.codigo} onClick={this.setBrand.bind(this, brand.codigo, brand.nome)}
-                                                        className={(this.state.active[brand.nome] !== undefined) ? `brand-${brand.nome} item ` + this.state.active[brand.nome] : `brand-${brand.nome} item `}>
-                                                        <span>{brand.nome}</span>
-                                                    </div>
+                                                    <Link
+                                                        activeClass="active"
+                                                        to="modelo"
+                                                        spy={true}
+                                                        smooth={true}
+                                                        offset={-70}
+                                                        duration={800}
+                                                        key={brand.codigo} >
+                                                        <div onClick={this.setBrand.bind(this, brand.codigo, brand.nome)}
+                                                            className={(this.state.active[brand.nome] !== undefined) ? `brand-${brand.nome} item ` + this.state.active[brand.nome] : `brand-${brand.nome} item `}>
+                                                            <span>{brand.nome}</span>
+                                                        </div>
+                                                    </Link>
                                                 ))}
 
                                             </div>
@@ -119,13 +138,21 @@ export default class TableFipe extends Component {
                         modelYear={this.modelYear.bind(this)}
                     />
                 </div>
-                <div className="model-year">
-                    <ListModelYear data={{ "vehicle": modelSelected, "modelo": modelo, "codeBrand": brandSelected }}
-                        yearSelected={this.yearSelected.bind(this)} />
-                </div>
-                <div className="vehicle">
-                    <Vehicle data={{ "vehicle": modelSelected, "modelo": modelo, "codeBrand": brandSelected, "year": yearSelected }} />
-                </div>
+                {brandSelected !== "" ?
+                    <div className="col-models">
+                        <div className="model-year">
+                            <ListModelYear data={{ "vehicle": modelSelected, "modelo": modelo, "codeBrand": brandSelected }}
+                                yearSelected={this.yearSelected.bind(this)} />
+                        </div>
+                        <div className="vehicle" id="vehicle">
+                            <Vehicle data={{ "vehicle": modelSelected, "modelo": modelo, "codeBrand": brandSelected, "year": yearSelected }}
+                                location={this.location.bind(this)} />
+                        </div>
+                    </div>
+
+
+                    : null
+                }
             </div>
         )
     }

@@ -1,7 +1,6 @@
-@import url("https://fonts.googleapis.com/css?family=Poppins&display=swap");
 .vehicle {
     width: 60%;
-    margin: 80px auto;
+    margin: 120px auto;
     padding: 0 90px;
 }
 
@@ -22,7 +21,6 @@
 .description-vehicle div {
     margin: 0 auto;
     padding: 9px;
-    font-family: 'Poppins', sans-serif;
     font-weight: unset;
 }
 
@@ -43,7 +41,7 @@ div.flex {
 p.fuel {
     background-color: #08a363;
     color: white;
-    padding: 8px;
+    padding: 7px;
     text-align: center;
     text-transform: uppercase;
     border: 0.5px solid;
@@ -58,6 +56,16 @@ p.fuel {
 
 .description-vehicle .brand, .description-vehicle .price {
     margin: 35px 0;
+}
+
+.save-favorite {
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.1s;
+}
+
+.save-favorite:hover {
+    color: #29df93;
 }
 
 @media screen and (max-width: 800px) {

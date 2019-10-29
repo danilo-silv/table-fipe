@@ -28,7 +28,7 @@
 }
 
 .models p.check {
-    padding: 274px 468px;
+    padding: 246px 468px;
 }
 
 section.children.models .item {
@@ -56,7 +56,7 @@ h2.title strong {
     font-weight: 700;
 }
 
-.children button {
+.children button.button-model {
     font-size: 0.65em;
     font-feature-settings: "pcap";
     font-variant: petite-caps;
@@ -75,7 +75,7 @@ h2.title strong {
     outline: none;
 }
 
-.children button:hover {
+.children button.button-model:hover {
     border-color: #29df93;
     background-color: #29df93;
 }

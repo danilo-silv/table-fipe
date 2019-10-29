@@ -26,7 +26,6 @@ export default class ListModel extends Component {
         if (this.props.codeBrand !== nextProps.codeBrand) {
             let { codeBrand, brand, model } = nextProps;
             if (codeBrand !== "" && brand !== "") {
-                console.log('não é vazio')
                 this.loadModels(model, codeBrand);
                 this.setState({ brand: Object.keys(brand).join() })
             }
@@ -71,7 +70,7 @@ export default class ListModel extends Component {
                             <p className="title">{brand}</p>
                         </div>
                         <div className="sidebar-content">
-                            <div className="models">
+                            <div className="models" id="modelo">
                                 {this.state.brand === '' ?
                                     <p className="check">Selecione uma marca</p>
                                     :
@@ -95,8 +94,8 @@ export default class ListModel extends Component {
                                                                 offset={-70}
                                                                 duration={800}
                                                             >
-                                                                <button
-                                                                    onClick={() => {this.setModel.bind(this, model.codigo, model.nome); this.props.modelYear(model); }}
+                                                                <button className="button-model"
+                                                                    onClick={() => { this.setModel.bind(this, model.codigo, model.nome); this.props.modelYear(model); }}
                                                                 >Veja anos do modelo</button>
 
                                                             </Link>

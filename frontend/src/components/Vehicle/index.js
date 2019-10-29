@@ -8,24 +8,14 @@ export default class Vehicle extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            vehicle: {
-                "Valor": "R$ 20.897,00",
-                "Marca": "GM - Chevrolet",
-                "Modelo": "Vectra Elegance 2.2 MPFI 16V Aut.",
-                "AnoModelo": 2005,
-                "Combustivel": "Gasolina",
-                "CodigoFipe": "004298-6",
-                "MesReferencia": "outubro de 2019 ",
-                "TipoVeiculo": 1,
-                "SiglaCombustivel": "G"
-            },
+            vehicle: '',
             loading: false,
         };
         this.loadModelsYear = this.loadModelsYear.bind(this);
     }
 
     UNSAFE_componentWillReceiveProps(nextProps) {
-        if (this.props.data !== nextProps.data) {
+        if (this.props.data.year !== nextProps.data.year) {
             let { codeBrand, vehicle, modelo, year } = nextProps.data;
             if (year !== "") {
                 this.loadModelsYear(modelo, codeBrand, vehicle.codigo, year);
@@ -36,15 +26,13 @@ export default class Vehicle extends Component {
     loadModelsYear = async (model, codeBrand, codigo, year) => {
         this.setState({ loading: true });
         const response = await trackPromise(api.get(`/${model}/marcas/${codeBrand}/modelos/${codigo}/anos/${year}`));
-        console.log(response);
         const { data } = response;
         this.setState({ vehicle: data, loading: false });
     };
 
     setFavorite(vehicle) {
-        console.log(vehicle);
         let dateLocal = localStorage['ArrayFavorite'];
-        if (dateLocal != undefined) {
+        if (dateLocal !== undefined) {
             let newVehicle = JSON.parse(dateLocal);
             newVehicle.push(vehicle);
             localStorage['ArrayFavorite'] = JSON.stringify(newVehicle);
@@ -52,12 +40,16 @@ export default class Vehicle extends Component {
             let ArrayFavorite = [vehicle];
             localStorage['ArrayFavorite'] = JSON.stringify(ArrayFavorite);
         }
+        let resp = window.confirm(`Veiculo ( ${vehicle.Modelo} ) Salvo na lista de favoritos\nDeseja ver seus veículos favoritados?`);
+        if (resp) {
+            this.props.location('/favoritos');
+        }
     }
 
     render() {
         const { vehicle, loading } = this.state;
         return (
-            <div className="content-year" id="vehicle">
+            <div className="content-year">
                 {vehicle === ''
                     ? null
                     :
@@ -105,7 +97,7 @@ export default class Vehicle extends Component {
                                                 </div>
                                             </div>
                                             <div className="save-favorite">
-                                                <p onClick={this.setFavorite.bind(this, vehicle)} className="content-icon">salvar</p>
+                                                <p onClick={this.setFavorite.bind(this, vehicle)} className="content-icon">Salvar na lista de favoritos</p>
                                             </div>
                                         </section>
                                     }
