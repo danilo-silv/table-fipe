@@ -32,7 +32,6 @@ export default class TableFipe extends Component {
 
 
     UNSAFE_componentWillReceiveProps(nextProps) {
-        console.log('veio')
         if (this.props.modelo !== nextProps.modelo) {
             let { modelo } = nextProps.modelo;
             this.setState({ modelo })
@@ -51,7 +50,6 @@ export default class TableFipe extends Component {
         await trackPromise(api.get(`/${modelo}/marcas`))
             .then((response) => {
                 const { data } = response;
-                console.log(data);
                 this.setState({ brands: data, loading: false, currentPage: 1 });
             }).catch(() => {
                 window.alert(`tivemos um problema ao consultar marcas de ${modelo}\nPor favor tente mais tarde!!`);

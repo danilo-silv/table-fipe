@@ -18,7 +18,6 @@ export default class TableFipe extends Component {
     }
     render() {
         const { modelo } = this.state;
-        console.log(modelo);
         return (
             <main className="main" >
                 <Header history={this.props.history}

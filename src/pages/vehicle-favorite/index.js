@@ -19,7 +19,6 @@ export default class VehicleFavorite extends Component {
         let newVehicle = vehicleFavorite.filter((vehicle) => {
             return vehicle.CodigoFipe !== vehicleDelete.CodigoFipe;
         });
-        console.log(newVehicle);
         localStorage['ArrayFavorite'] = JSON.stringify(newVehicle);
         this.setState({ vehicle: newVehicle });
     };
