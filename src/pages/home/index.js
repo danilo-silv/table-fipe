@@ -16,9 +16,9 @@ export default class Home extends Component {
                 </header>
                 <footer>
                     <ul>
-                        <li className="icon-car"><Link to={{ pathname: `/consulta-tabela-fipe`, state: { modelo: 'carros' } }}><img src={require('../..//fonts/car2_83929.svg')} alt="icon-car" title="Carros" /></Link></li>
-                        <li className="icon-motorcycle"><Link to={{ pathname: `/consulta-tabela-fipe`, state: { modelo: 'motos' } }}><img src={require('../..//fonts/motorcycle.svg')} alt="icon-motorcycle" title="Motocicleta" /></Link></li>
-                        <li className="icon-truck"><Link to={{ pathname: `/consulta-tabela-fipe`, state: { modelo: 'caminhoes' } }}><img src={require('../..//fonts/truck.svg')} alt="icon-truck" title="Caminhões" /></Link></li>
+                        <li className="icon-car"><Link to={{ pathname: `/consulta-automoveis`, state: { modelo: 'carros' } }}><img src={require('../..//fonts/car2_83929.svg')} alt="icon-car" title="Carros" /></Link></li>
+                        <li className="icon-motorcycle"><Link to={{ pathname: `/consulta-automoveis`, state: { modelo: 'motos' } }}><img src={require('../..//fonts/motorcycle.svg')} alt="icon-motorcycle" title="Motocicleta" /></Link></li>
+                        <li className="icon-truck"><Link to={{ pathname: `/consulta-automoveis`, state: { modelo: 'caminhoes' } }}><img src={require('../..//fonts/truck.svg')} alt="icon-truck" title="Caminhões" /></Link></li>
                     </ul>
                 </footer>
             </section >

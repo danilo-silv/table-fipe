@@ -99,7 +99,7 @@ export default class TableFipe extends Component {
                         <div className="sidebar-wrapper">
                             <div className="sidebar-widget widget_categories">
                                 <div className="sidebar-title">
-                                    <p className="title">Marcas</p>
+                                    <p className="title">Marcas - {modelo}</p>
                                 </div>
                                 {loading ? <LoadingIndicator /> :
                                     <div className="sidebar-content">
