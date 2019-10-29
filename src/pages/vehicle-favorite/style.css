@@ -54,15 +54,11 @@ div.flex {
 }
 
 p.fuel {
-    background-color: #08a363;
-    color: white;
-    padding: 7px;
-    text-align: center;
-    text-transform: uppercase;
-    border: 0.5px solid;
-    border-radius: 16px;
-    font-size: 13px;
-    margin: 15px;
+    margin-top: 6px;
+}
+
+p.fuel em {
+    border-bottom: 0.8px solid;
 }
 
 .info-additional p {
@@ -162,16 +158,16 @@ section.children .item span {
     color: #29df93;
     border-color: #29df93;
 }
+
 .delete-favorite {
     text-align: center;
-    cursor: pointer;
-    transition: all 0.1s;
+    width: 265px;
+    margin: 0 auto;
 }
 
-.delete-favorite:hover {
-    color: #29df93;
+.favorite:hover {
+    background-color: #29df93;
 }
-
 
 @media screen and (max-width: 800px) {
     .vehicle-favorite {

@@ -23,8 +23,12 @@ export default class ListModel extends Component {
     }
 
     UNSAFE_componentWillReceiveProps(nextProps) {
+        if (this.props.model !== nextProps.model) {
+            this.setState({ brand: '' });
+        }
         if (this.props.codeBrand !== nextProps.codeBrand) {
             let { codeBrand, brand, model } = nextProps;
+
             if (codeBrand !== "" && brand !== "") {
                 this.loadModels(model, codeBrand);
                 this.setState({ brand: Object.keys(brand).join() })

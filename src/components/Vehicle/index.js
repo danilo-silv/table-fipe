@@ -101,7 +101,7 @@ export default class Vehicle extends Component {
                                                 </div>
                                             </div>
                                             <div className="save-favorite">
-                                                <p onClick={this.setFavorite.bind(this, vehicle)} className="content-icon">Salvar na lista de favoritos</p>
+                                                <p onClick={this.setFavorite.bind(this, vehicle)} className="content-icon favorite">Salvar na lista de favoritos</p>
                                             </div>
                                         </section>
                                     }

@@ -38,8 +38,8 @@ div.flex {
     padding: 0;
 }
 
-p.fuel {
-    background-color: #08a363;
+p.favorite {
+    background-color: #1a9f67;
     color: white;
     padding: 7px;
     text-align: center;
@@ -48,10 +48,20 @@ p.fuel {
     border-radius: 16px;
     font-size: 13px;
     margin: 15px;
+    transition: all 0.5s;
+    cursor: pointer;
 }
 
 .info-additional p {
     font-size: 12px;
+}
+
+p.fuel {
+    margin-top: 6px;
+}
+
+p.fuel em {
+    border-bottom: 0.8px solid;
 }
 
 .description-vehicle .brand, .description-vehicle .price {
@@ -60,12 +70,12 @@ p.fuel {
 
 .save-favorite {
     text-align: center;
-    cursor: pointer;
-    transition: all 0.1s;
+    width: 265px;
+    margin: 0 auto;
 }
 
-.save-favorite:hover {
-    color: #29df93;
+p.favorite:hover {
+    background-color: #29df93;
 }
 
 @media screen and (max-width: 800px) {

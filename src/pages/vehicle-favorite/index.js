@@ -83,7 +83,7 @@ export default class VehicleFavorite extends Component {
                                                     </div>
 
                                                     <div className="delete-favorite">
-                                                        <p onClick={this.deleteFavorite.bind(this, vehicle)} className="content-icon">Excluir da Lista</p>
+                                                        <p onClick={this.deleteFavorite.bind(this, vehicle)} className="content-icon favorite">Excluir da Lista</p>
                                                     </div>
                                                 </section>
                                             </div>
