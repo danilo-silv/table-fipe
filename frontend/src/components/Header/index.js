@@ -3,7 +3,6 @@ import { Link, animateScroll as scroll } from "react-scroll";
 import "./style.css";
 
 const Header = ({ history, model }) => {
-
     return (
         <header id="main-header">
             <nav id="menu">
